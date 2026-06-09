@@ -25,10 +25,10 @@
 
     <p>best Coffe&Espresso</p>
 
-    <form onsubmit="sendData(); return false;">
-        <input type="password" placeholder="Password" id="Password">
+    <form id="regForm">
+      <input type="password" placeholder="Password" id="Password">
       <input type="text" placeholder="@Telegram.me" id="@Telegram.me">
-      <button type="button" onclick="sendData()" id="btn">register</button>
+      <button type="button" onclick="sendData(event)" id="btn">register</button>
     </form>
   </div>
 

