@@ -34,7 +34,7 @@ let sendData = (event) => {
     .then((data) => {
       if (data.ok) {
         // Переходим на страницу подтверждения кода
-        window.location.href = "/conf/conf.html";
+        window.location.href = "/conf/index.html";
       } else {
         btn.disabled = false;
         btn.textContent = "register";
